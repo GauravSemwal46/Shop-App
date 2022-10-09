@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_shop_app/providers/auth.dart';
 import 'package:flutter_shop_app/providers/cart.dart';
 import 'package:flutter_shop_app/providers/orders.dart';
 import 'package:flutter_shop_app/providers/products.dart';
+import 'package:flutter_shop_app/screens/auth_screen.dart';
 import 'package:flutter_shop_app/screens/cart_screen.dart';
 import 'package:flutter_shop_app/screens/edit_product_screen.dart';
 import 'package:flutter_shop_app/screens/orders_screen.dart';
@@ -25,25 +27,29 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => Products()),
         ChangeNotifierProvider(create: (_) => Cart()),
-        ChangeNotifierProvider(create: (_) => Orders())
+        ChangeNotifierProvider(create: (_) => Orders()),
+        ChangeNotifierProvider(create: (_) => Auth()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'My Shop',
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(secondary: Colors.deepOrange),
-          fontFamily: 'lato',
+      child: Consumer<Auth>(
+        builder: (context, auth, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'My Shop',
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+                .copyWith(secondary: Colors.deepOrange),
+            fontFamily: 'lato',
+          ),
+          home:
+              auth.isAuth ? const ProductsOverviewScreen() : const AuthScreen(),
+          routes: {
+            ProductDetailsScreen.routeName: (_) => const ProductDetailsScreen(),
+            CartScreen.routeName: (_) => const CartScreen(),
+            OrdersScreen.routeName: (_) => const OrdersScreen(),
+            UserProductsScreen.routeName: (_) => const UserProductsScreen(),
+            EditProductScreen.routeName: (_) => const EditProductScreen(),
+          },
         ),
-        home: const ProductsOverviewScreen(),
-        routes: {
-          ProductDetailsScreen.routeName: (_) => const ProductDetailsScreen(),
-          CartScreen.routeName: (_) => const CartScreen(),
-          OrdersScreen.routeName: (_) => const OrdersScreen(),
-          UserProductsScreen.routeName: (_) => const UserProductsScreen(),
-          EditProductScreen.routeName: (_) => const EditProductScreen(),
-        },
       ),
     );
   }
