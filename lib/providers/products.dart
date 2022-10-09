@@ -102,7 +102,7 @@ class Products with ChangeNotifier {
     notifyListeners();
     final response = await http.delete(url);
     if (response.statusCode >= 400) {
-      _items.insert(existingProductIndex, existingProduct!);
+      _items.insert(existingProductIndex, existingProduct);
       notifyListeners();
       throw HttpExceptions('Could not delete this product');
     }
