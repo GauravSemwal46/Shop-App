@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/app_colors.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/models/http_exceptions.dart';
 import 'package:flutter_shop_app/providers/auth.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +23,8 @@ class AuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  const Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  const Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+                  AppColors.purpleColor.withOpacity(0.5),
+                  AppColors.orangeColor.withOpacity(0.9),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -47,7 +49,7 @@ class AuthScreen extends StatelessWidget {
                         ..translate(-10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.deepOrange.shade900,
+                        color: AppColors.deepOrangeColor.shade900,
                         boxShadow: const [
                           BoxShadow(
                             blurRadius: 8,
@@ -57,14 +59,14 @@ class AuthScreen extends StatelessWidget {
                         ],
                       ),
                       child: Text(
-                        'MyShop',
+                        AppConstants.myShop,
                         style: TextStyle(
                           color: Theme.of(context)
                               .primaryTextTheme
                               .headline6
                               ?.color,
                           fontSize: 50,
-                          fontFamily: 'Anton',
+                          fontFamily: AppConstants.primaryFont,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
@@ -107,14 +109,12 @@ class _AuthCardState extends State<AuthCard> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('An error occurred!'),
+        title: const Text(AppConstants.errorOccured),
         content: Text(message),
         actions: <Widget>[
           TextButton(
-            child: const Text('Okay'),
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
+            child: const Text(AppConstants.okay),
+            onPressed: () => Navigator.of(ctx).pop(),
           )
         ],
       ),
@@ -141,22 +141,21 @@ class _AuthCardState extends State<AuthCard> {
             .signUp(_authData['email'] ?? '', _authData['password'] ?? '');
       }
     } on HttpExceptions catch (error) {
-      var errorMessage = 'Authentication failed';
-      if (error.toString().contains('EMAIL_EXISTS')) {
-        errorMessage = 'This email address is already in use.';
-      } else if (error.toString().contains('INVALID_EMAIL')) {
-        errorMessage = 'This is not a valid email';
-      } else if (error.toString().contains('WEAK_PASSWORD')) {
-        errorMessage = 'This password is too weak';
-      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-        errorMessage = 'Could not find a user with that email.';
-      } else if (error.toString().contains('INVALID_PASSWORD')) {
-        errorMessage = 'Invalid Password';
+      var errorMessage = AppConstants.authenticationFailed;
+      if (error.toString().contains(AppConstants.emailExist)) {
+        errorMessage = AppConstants.emailExistMessage;
+      } else if (error.toString().contains(AppConstants.invalidEmail)) {
+        errorMessage = AppConstants.invalidEmailMessage;
+      } else if (error.toString().contains(AppConstants.weakPassword)) {
+        errorMessage = AppConstants.weakPasswordMessage;
+      } else if (error.toString().contains(AppConstants.emailNotFound)) {
+        errorMessage = AppConstants.emailNotFoundMessage;
+      } else if (error.toString().contains(AppConstants.invalidPassword)) {
+        errorMessage = AppConstants.invalidPasswordMessage;
       }
       _showErrorDialog(errorMessage);
     } catch (error) {
-      const errorMessage =
-          'Could not authenticate you. Please try again later.';
+      const errorMessage = AppConstants.authErrorMessage;
       _showErrorDialog(errorMessage);
     }
 
@@ -199,13 +198,14 @@ class _AuthCardState extends State<AuthCard> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'E-Mail'),
+                  decoration:
+                      const InputDecoration(labelText: AppConstants.email),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null ||
                         value.isEmpty ||
                         !value.contains('@')) {
-                      return 'Invalid email!';
+                      return AppConstants.invalidEmailMessage;
                     }
                     return null;
                   },
@@ -214,12 +214,13 @@ class _AuthCardState extends State<AuthCard> {
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Password'),
+                  decoration:
+                      const InputDecoration(labelText: AppConstants.password),
                   obscureText: true,
                   controller: _passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty || value.length < 5) {
-                      return 'Password is too short!';
+                      return AppConstants.shortPasswordMessage;
                     }
                     return null;
                   },
@@ -230,16 +231,13 @@ class _AuthCardState extends State<AuthCard> {
                 if (_authMode == AuthMode.signup)
                   TextFormField(
                     enabled: _authMode == AuthMode.signup,
-                    decoration:
-                        const InputDecoration(labelText: 'Confirm Password'),
+                    decoration: const InputDecoration(
+                        labelText: AppConstants.confirmPassword),
                     obscureText: true,
                     validator: _authMode == AuthMode.signup
-                        ? (value) {
-                            if (value != _passwordController.text) {
-                              return 'Passwords do not match!';
-                            }
-                            return null;
-                          }
+                        ? (value) => value != _passwordController.text
+                            ? AppConstants.passwordNotMatch
+                            : null
                         : null,
                   ),
                 const SizedBox(height: 20),
@@ -257,9 +255,11 @@ class _AuthCardState extends State<AuthCard> {
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
                     child: Text(
-                      _authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP',
+                      _authMode == AuthMode.login
+                          ? AppConstants.login
+                          : AppConstants.signUp,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppColors.whiteColor,
                       ),
                     ),
                   ),
@@ -271,7 +271,7 @@ class _AuthCardState extends State<AuthCard> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   child: Text(
-                      '${_authMode == AuthMode.login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
+                      '${_authMode == AuthMode.login ? AppConstants.signUp : AppConstants.login} ${AppConstants.instead}'),
                 ),
               ],
             ),
