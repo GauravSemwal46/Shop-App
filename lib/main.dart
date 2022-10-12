@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_shop_app/helpers/app_colors.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/providers/auth.dart';
 import 'package:flutter_shop_app/providers/cart.dart';
 import 'package:flutter_shop_app/providers/orders.dart';
@@ -44,12 +46,13 @@ class MyApp extends StatelessWidget {
       child: Consumer<Auth>(
         builder: (context, auth, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'My Shop',
+          title: AppConstants.myShop,
           theme: ThemeData(
-            primarySwatch: Colors.purple,
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-                .copyWith(secondary: Colors.deepOrange),
-            fontFamily: 'lato',
+            primarySwatch: AppColors.darkPurpleColor,
+            colorScheme:
+                ColorScheme.fromSwatch(primarySwatch: AppColors.darkPurpleColor)
+                    .copyWith(secondary: AppColors.deepOrangeColor),
+            fontFamily: AppConstants.lato,
           ),
           home: auth.isAuth
               ? const ProductsOverviewScreen()

@@ -62,4 +62,5 @@ class AppConstants {
       'Do you really want to delete the item?';
   static const undo = 'UNDO';
   static const addedItemMessage = 'Added item to cart';
+  static const lato = 'lato';
 }
