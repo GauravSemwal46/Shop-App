@@ -5,4 +5,5 @@ class AppColors {
   static const orangeColor = Color.fromRGBO(255, 188, 117, 1);
   static const deepOrangeColor = Colors.deepOrange;
   static const whiteColor = Colors.white;
+  static const greyColor = Colors.grey;
 }

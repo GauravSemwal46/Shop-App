@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/providers/cart.dart' show Cart;
 import 'package:flutter_shop_app/providers/orders.dart';
 import 'package:flutter_shop_app/widgets/cart_item.dart';
@@ -13,7 +14,7 @@ class CartScreen extends StatelessWidget {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Cart'),
+        title: const Text(AppConstants.yourCart),
       ),
       body: Column(children: [
         Card(
@@ -24,7 +25,7 @@ class CartScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Total',
+                  AppConstants.total,
                   style: TextStyle(fontSize: 20),
                 ),
                 const Spacer(),
@@ -97,7 +98,7 @@ class _OrderButtonState extends State<OrderButton> {
             },
       child: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : const Text('ORDER NOW'),
+          : const Text(AppConstants.orderNow),
     );
   }
 }

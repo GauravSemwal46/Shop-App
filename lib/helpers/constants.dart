@@ -24,4 +24,24 @@ class AppConstants {
   static const login = 'LOGIN';
   static const signUp = 'SIGN UP';
   static const instead = 'INSTEAD';
+  static const yourCart = 'Your Cart';
+  static const total = 'Total';
+  static const orderNow = 'ORDER NOW';
+  static const somethingWentWrong = 'Something went wrong.';
+  static const editProduct = 'Edit Product';
+  static const addProduct = 'Add Product';
+  static const emptyTitle = 'Please enter a title.';
+  static const title = 'Title';
+  static const price = 'Price';
+  static const emptyPrice = 'Please enter a price';
+  static const invalidNumberMessage = 'Please enter a valid number';
+  static const negativePriceMessage = 'Please enter price greater than 0';
+  static const description = 'Description';
+  static const emptyDescription = 'Please enter a description';
+  static const descSizeMessage = 'Should be atleast 10 character long';
+  static const enterUrl = 'Enter a Url';
+  static const imageUrl = 'Image Url';
+  static const emptyImageUrl = 'Please enter an image Url';
+  static const invalidUrlMessage = 'Please enter a valid url';
+  static const invalidImageUrlMessage = 'Please enter a valid image url';
 }
