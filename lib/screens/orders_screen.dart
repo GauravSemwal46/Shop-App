@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/providers/orders.dart' show Orders;
 import 'package:flutter_shop_app/widgets/app_drawer.dart';
 import 'package:flutter_shop_app/widgets/order_item.dart';
@@ -28,7 +29,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Your Orders')),
+      appBar: AppBar(title: const Text(AppConstants.yourOrders)),
       drawer: const AppDrawer(),
       body: FutureBuilder(
           future: _orderFuture,
@@ -40,7 +41,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             } else {
               if (snapshot.hasError) {
                 return const Center(
-                  child: Text('Error occured!'),
+                  child: Text(AppConstants.errorOccured),
                 );
               } else {
                 return Consumer<Orders>(

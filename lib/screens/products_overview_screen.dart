@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/providers/cart.dart';
 import 'package:flutter_shop_app/providers/products.dart';
 import 'package:flutter_shop_app/screens/cart_screen.dart';
@@ -45,7 +46,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My App'),
+        title: const Text(AppConstants.myApp),
         actions: [
           Consumer<Cart>(
             builder: (ctx, cart, ch) => Badge(
@@ -69,11 +70,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             itemBuilder: (_) => [
               const PopupMenuItem(
                 value: FilterOptions.favorites,
-                child: Text('Only Favorites'),
+                child: Text(AppConstants.onlyFavorites),
               ),
               const PopupMenuItem(
                 value: FilterOptions.all,
-                child: Text('Show All'),
+                child: Text(AppConstants.showAll),
               )
             ],
           ),

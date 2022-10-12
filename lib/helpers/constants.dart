@@ -44,4 +44,9 @@ class AppConstants {
   static const emptyImageUrl = 'Please enter an image Url';
   static const invalidUrlMessage = 'Please enter a valid url';
   static const invalidImageUrlMessage = 'Please enter a valid image url';
+  static const yourOrders = 'Your Orders';
+  static const myApp = 'My App';
+  static const showAll = 'Show All';
+  static const onlyFavorites = 'Only Favorites';
+  static const loading = 'Loading...';
 }

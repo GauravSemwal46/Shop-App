@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/app_colors.dart';
 import 'package:flutter_shop_app/providers/products.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,7 @@ class ProductDetailsScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               '\$${loadedProduct.price}',
-              style: const TextStyle(color: Colors.grey, fontSize: 20),
+              style: const TextStyle(color: AppColors.greyColor, fontSize: 20),
             ),
             const SizedBox(height: 20),
             Container(
