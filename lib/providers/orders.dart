@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/app_secrets.dart';
 import 'package:flutter_shop_app/providers/cart.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,8 +30,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetProducts() async {
-    final url = Uri.parse(
-        'https://shop-app-6d30a-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
+    final url =
+        Uri.parse('${AppSecrets.baseUrl}/orders/$userId.json?auth=$authToken');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>?;
@@ -64,8 +65,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
-    final url = Uri.parse(
-        'https://shop-app-6d30a-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
+    final url =
+        Uri.parse('${AppSecrets.baseUrl}/orders/$userId.json?auth=$authToken');
     final timeStamp = DateTime.now();
     try {
       final response = await http.post(

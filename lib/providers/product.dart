@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/app_secrets.dart';
 import 'package:http/http.dart' as http;
 
 class Product with ChangeNotifier {
@@ -29,7 +30,7 @@ class Product with ChangeNotifier {
     final oldStatus = isFavorite;
     _setFavValue(!isFavorite);
     final url = Uri.parse(
-        'https://shop-app-6d30a-default-rtdb.firebaseio.com/userFavorites/$userId/$id.json?auth=$token');
+        '${AppSecrets.baseUrl}/userFavorites/$userId/$id.json?auth=$token');
     try {
       final response = await http.put(
         url,
