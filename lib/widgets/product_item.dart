@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/providers/auth.dart';
 import 'package:flutter_shop_app/providers/cart.dart';
 import 'package:flutter_shop_app/providers/product.dart';
@@ -38,10 +39,10 @@ class ProductItem extends StatelessWidget {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: const Text('Added item to cart'),
+                  content: const Text(AppConstants.addedItemMessage),
                   duration: const Duration(seconds: 2),
                   action: SnackBarAction(
-                    label: 'UNDO',
+                    label: AppConstants.undo,
                     onPressed: () {
                       cart.removeItem(product.id);
                     },
@@ -52,12 +53,10 @@ class ProductItem extends StatelessWidget {
           ),
         ),
         child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              ProductDetailsScreen.routeName,
-              arguments: product.id,
-            );
-          },
+          onTap: () => Navigator.of(context).pushNamed(
+            ProductDetailsScreen.routeName,
+            arguments: product.id,
+          ),
           child: Image.network(
             product.imageUrl,
             fit: BoxFit.cover,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/app_colors.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/providers/cart.dart';
 import 'package:provider/provider.dart';
 
@@ -27,20 +29,16 @@ class CartItem extends StatelessWidget {
         return showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('Are you sure?'),
-            content: const Text('Do you really want to delete the item?'),
+            title: const Text(AppConstants.confirmationText),
+            content: const Text(AppConstants.deleteConfirmationText),
             actions: [
               TextButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop(false);
-                },
-                child: const Text('No'),
+                onPressed: () => Navigator.of(ctx).pop(false),
+                child: const Text(AppConstants.no),
               ),
               TextButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop(true);
-                },
-                child: const Text('Yes'),
+                onPressed: () => Navigator.of(ctx).pop(true),
+                child: const Text(AppConstants.yes),
               ),
             ],
           ),
@@ -57,7 +55,7 @@ class CartItem extends StatelessWidget {
         child: const Icon(
           Icons.delete,
           size: 40,
-          color: Colors.white,
+          color: AppColors.whiteColor,
         ),
       ),
       child: Card(
@@ -72,7 +70,7 @@ class CartItem extends StatelessWidget {
               ),
             ),
             title: Text(title),
-            subtitle: Text('Total: \$${price * quantity}'),
+            subtitle: Text('${AppConstants.total}: \$${price * quantity}'),
             trailing: Text('$quantity x'),
           ),
         ),

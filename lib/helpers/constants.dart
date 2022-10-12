@@ -49,4 +49,17 @@ class AppConstants {
   static const showAll = 'Show All';
   static const onlyFavorites = 'Only Favorites';
   static const loading = 'Loading...';
+  static const yourProducts = 'Your Products';
+  static const drawerTitle = 'Hello Friends';
+  static const shop = 'Shop';
+  static const orders = 'Orders';
+  static const manageProduct = 'Manage Products';
+  static const logout = 'Logout';
+  static const no = 'No';
+  static const yes = 'Yes';
+  static const confirmationText = 'Are you sure?';
+  static const deleteConfirmationText =
+      'Do you really want to delete the item?';
+  static const undo = 'UNDO';
+  static const addedItemMessage = 'Added item to cart';
 }

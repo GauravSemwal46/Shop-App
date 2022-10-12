@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_shop_app/helpers/app_colors.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_app/providers/orders.dart' as ord;
@@ -52,7 +53,7 @@ class _OrderItemState extends State<OrderItem> {
                     '${widget.order.products[i].quantity} x \$${widget.order.products[i].price}',
                     style: const TextStyle(
                       fontSize: 18,
-                      color: Colors.grey,
+                      color: AppColors.greyColor,
                     ),
                   )
                 ],

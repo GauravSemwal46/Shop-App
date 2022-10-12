@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/constants.dart';
 import 'package:flutter_shop_app/providers/products.dart';
 import 'package:flutter_shop_app/screens/edit_product_screen.dart';
 import 'package:flutter_shop_app/widgets/app_drawer.dart';
@@ -16,10 +17,9 @@ class UserProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final productData = Provider.of<Products>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Products'),
+        title: const Text(AppConstants.yourProducts),
         actions: [
           IconButton(
             onPressed: () =>
