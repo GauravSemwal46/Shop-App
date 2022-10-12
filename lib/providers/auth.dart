@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop_app/helpers/app_secrets.dart';
 import 'package:flutter_shop_app/models/http_exceptions.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Auth with ChangeNotifier {
   String? _token;
@@ -54,13 +54,13 @@ class Auth with ChangeNotifier {
       );
       _autoLogout();
       notifyListeners();
-      final prefs = await SharedPreferences.getInstance();
+      const storage = FlutterSecureStorage();
       final userData = json.encode({
         'token': _token,
         'userId': userId,
         'expiryDate': _expiryDate?.toIso8601String()
       });
-      prefs.setString('userData', userData);
+      await storage.write(key: 'userData', value: userData);
     } catch (e) {
       rethrow;
     }
@@ -75,12 +75,12 @@ class Auth with ChangeNotifier {
   }
 
   Future<bool> tryAutoLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('userData')) {
+    final storage = await const FlutterSecureStorage().readAll();
+    if (!storage.containsKey('userData')) {
       return false;
     }
     final extractedUserData =
-        json.decode(prefs.getString('userData') ?? '') as Map<String, dynamic>;
+        json.decode(storage['userData'] ?? '') as Map<String, dynamic>;
     final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
     if (expiryDate.isBefore(DateTime.now())) {
       return false;
@@ -102,8 +102,8 @@ class Auth with ChangeNotifier {
       _authTimer = null;
     }
     notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    const storage = FlutterSecureStorage();
+    storage.deleteAll();
   }
 
   void _autoLogout() {
