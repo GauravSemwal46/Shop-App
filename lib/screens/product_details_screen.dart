@@ -4,7 +4,6 @@ import 'package:flutter_shop_app/providers/products.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  static const routeName = '/product-details';
   const ProductDetailsScreen({super.key});
 
   @override

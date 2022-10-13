@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_app/helpers/constants.dart';
+import 'package:flutter_shop_app/helpers/routes.dart';
 import 'package:flutter_shop_app/providers/auth.dart';
-import 'package:flutter_shop_app/screens/orders_screen.dart';
-import 'package:flutter_shop_app/screens/user_product_screen.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -28,14 +27,14 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.payment),
             title: const Text(AppConstants.orders),
             onTap: () => Navigator.of(context)
-                .pushReplacementNamed(OrdersScreen.routeName),
+                .pushReplacementNamed(AppRoutes.ordersRoute),
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.edit),
             title: const Text(AppConstants.manageProduct),
             onTap: () => Navigator.of(context)
-                .pushReplacementNamed(UserProductsScreen.routeName),
+                .pushReplacementNamed(AppRoutes.userProductRoute),
           ),
           const Divider(),
           ListTile(

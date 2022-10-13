@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/helpers/routes.dart';
 import 'package:flutter_shop_app/providers/products.dart';
-import 'package:flutter_shop_app/screens/edit_product_screen.dart';
 import 'package:provider/provider.dart';
 
 class UserProductItem extends StatelessWidget {
@@ -28,7 +28,7 @@ class UserProductItem extends StatelessWidget {
         child: Row(children: [
           IconButton(
             onPressed: () => Navigator.of(context).pushNamed(
-              EditProductScreen.routeName,
+              AppRoutes.editProductRoute,
               arguments: id,
             ),
             icon: Icon(

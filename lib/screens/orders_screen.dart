@@ -6,7 +6,6 @@ import 'package:flutter_shop_app/widgets/order_item.dart';
 import 'package:provider/provider.dart';
 
 class OrdersScreen extends StatefulWidget {
-  static const routeName = '/orders';
   const OrdersScreen({super.key});
 
   @override

@@ -6,7 +6,6 @@ import 'package:flutter_shop_app/providers/products.dart';
 import 'package:provider/provider.dart';
 
 class EditProductScreen extends StatefulWidget {
-  static const routeName = '/edit-product';
   const EditProductScreen({super.key});
 
   @override
